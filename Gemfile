@@ -23,7 +23,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'devise_token_auth'
 
 # Use Paperclip for file uploads
-gem 'paperclip'
+gem 'paperclip', '~> 5.2.1'
 
 
 # Use Capistrano for deployment
