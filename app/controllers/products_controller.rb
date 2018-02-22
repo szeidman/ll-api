@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /products
   # GET /products.json
@@ -8,11 +9,13 @@ class ProductsController < ApplicationController
       if User.find(params[:user_id])
         @user = User.find(params[:user_id])
         @products = @user.products
+        render json: @products
       else
         render json: "Error"
       end
     else
       @products = Product.all
+      render json: @products
     end
   end
 
