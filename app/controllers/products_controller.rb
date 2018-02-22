@@ -35,7 +35,6 @@ class ProductsController < ApplicationController
       end
     else
       @product = Product.new(product_params)
-
       if @product.save
         render :show, status: :created, location: @product
       else
@@ -47,10 +46,22 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
-    if @product.update(product_params)
-      render :show, status: :ok, location: @product
+    if params[:user_id]
+      if User.find(params[:user_id])
+        @user = User.find(params[:user_id])
+        if @product.users.find_by(id: @user.id)
+          @product.users.delete(@user.id)
+        else
+          @product.users << @user
+        end
+        render json: @user.products
+      end
     else
-      render json: @product.errors, status: :unprocessable_entity
+      if @product.update(product_params)
+        render :show, status: :ok, location: @product
+      else
+        render json: @product.errors, status: :unprocessable_entity
+      end
     end
   end
 
