@@ -2,7 +2,7 @@ class Product < ApplicationRecord
    # before_validation :parse_picture
    # attr_accessor :image_base
 
-   has_attached_file :image
+   has_attached_file :image, default_url: "/images/:style/missing.png"
    do_not_validate_attachment_file_type :image
 
    has_many :products_users
