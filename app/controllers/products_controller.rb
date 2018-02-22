@@ -4,7 +4,16 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    if params[:user_id]
+      if User.find(params[:user_id])
+        @user = User.find(params[:user_id])
+        @products = @user.products
+      else
+        render json: "Error"
+      end
+    else
+      @products = Product.all
+    end
   end
 
   # GET /products/1

@@ -1,4 +1,4 @@
-class ProductUser < ApplicationRecord
+class ProductsUser < ApplicationRecord
    belongs_to :product
    belongs_to :user
 end
