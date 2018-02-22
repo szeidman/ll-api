@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   # GET /products
   # GET /products.json
@@ -10,8 +10,6 @@ class ProductsController < ApplicationController
         @user = User.find(params[:user_id])
         @products = @user.products
         render json: @products
-      else
-        render json: "Error"
       end
     else
       @products = Product.all
@@ -27,12 +25,22 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
-
-    if @product.save
-      render :show, status: :created, location: @product
+    if params[:user_id]
+      if User.find(params[:user_id])
+        @user = User.find(params[:user_id])
+        @product = @user.products.build(product_params)
+        if @product.save
+          render :show, status: :created, location: @product
+        end
+      end
     else
-      render json: @product.errors, status: :unprocessable_entity
+      @product = Product.new(product_params)
+
+      if @product.save
+        render :show, status: :created, location: @product
+      else
+        render json: @product.errors, status: :unprocessable_entity
+      end
     end
   end
 

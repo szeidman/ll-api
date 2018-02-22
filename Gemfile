@@ -25,6 +25,8 @@ gem 'devise_token_auth'
 # Use Paperclip for file uploads
 gem 'paperclip', '~> 5.2.1'
 
+# Use Javascript Web Tokens for API securitization
+gem 'jwt'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
