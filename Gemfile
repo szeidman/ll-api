@@ -22,6 +22,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Devise token authorization for authentication management
 gem 'devise_token_auth'
 
+# Use simple token authorization as alternative for authentication management
+gem 'simple_token_authentication', '~> 1.0'
+
 # Use Paperclip for file uploads
 gem 'paperclip', '~> 5.2.1'
 

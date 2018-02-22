@@ -7,4 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 first_products = Product.create([{name: 'First', description: '1st', price: 1.25}, {name: 'Second', description: '2nd', price: 2.25}, {name: 'Third', description: '3rd', price: 3.25}])
 
-User.create(first_name: 'Ted', last_name: 'Nelson', email: 'ted@ted.ted', password: "whoa", products: first_products)
+User.create(first_name: 'Ted', last_name: 'Nelson', email: 'ted@ted.ted', password: "whoa", authentication_token: "8X8xB43QQ4Am53mCpUiu", products: first_products)
