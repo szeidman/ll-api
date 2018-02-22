@@ -31,6 +31,8 @@ class ProductsController < ApplicationController
         if @product.save
           render :show, status: :created, location: @product
         end
+      else
+        render :json => { :errors => ["You are not authorized to make changes for this user."]}, :status => 401
       end
     else
       @product = Product.new(product_params)
@@ -53,6 +55,8 @@ class ProductsController < ApplicationController
           @product.users << current_user
         end
         render json: @user.products
+      else
+        render :json => { :errors => ["You are not authorized to make changes for this user."]}, :status => 401
       end
     else
       if @product.update(product_params)
@@ -77,6 +81,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :description, :price, :image)
+      params.require(:product).permit(:name, :description, :price, :image_base)
     end
 end
