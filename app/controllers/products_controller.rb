@@ -26,9 +26,8 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     if params[:user_id]
-      if User.find(params[:user_id])
-        @user = User.find(params[:user_id])
-        @product = @user.products.build(product_params)
+      if User.find(params[:user_id]) == current_user
+        @product = current_user.products.build(product_params)
         if @product.save
           render :show, status: :created, location: @product
         end
@@ -47,12 +46,11 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1.json
   def update
     if params[:user_id]
-      if User.find(params[:user_id])
-        @user = User.find(params[:user_id])
-        if @product.users.find_by(id: @user.id)
-          @product.users.delete(@user.id)
+      if User.find(params[:user_id]) == current_user
+        if @product.users.find_by(id: current_user.id)
+          @product.users.delete(current_user.id)
         else
-          @product.users << @user
+          @product.users << current_user
         end
         render json: @user.products
       end
