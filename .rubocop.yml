@@ -1,0 +1,33 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 2.6.3
+  Exclude:
+    - bin/*
+    - db/*
+    - db/**/*
+
+Rails:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 55
+
+Metrics/AbcSize:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
